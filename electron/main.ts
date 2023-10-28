@@ -3,6 +3,7 @@ import YTDlpWrap from 'yt-dlp-wrap';
 const pathToFfmpeg = require('ffmpeg-static')
 const player= require('play-sound')();
 const fs = require('fs');
+require('dotenv').config();
 import path from 'node:path';
 
 let ytDlpWrap: YTDlpWrap;
@@ -151,7 +152,7 @@ ipcMain.handle('playAudio', (event: any, videoId: string) => {
 
 
 ipcMain.handle('searchAudio', (event: any, query) => {
-  const apiKey = 'AIzaSyDgsQhgWvkpRnyz1I-zAH4-abKTzZgMZDI';
+  const apiKey = process.env.GOOGLE_API_KEY;
   const url = `https://www.googleapis.com/youtube/v3/search/?key=${apiKey}&q=${query}&type=video&part=snippet`;
   // console.log(url);
   const request = net.request(url)
