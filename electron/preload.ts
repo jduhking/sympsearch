@@ -118,6 +118,7 @@ declare global {
   interface Window {
     appBridge: {
       searchAudio: (query: string) => void
+      playAudio: (videoId: string) => void
     }
   }
 }
@@ -126,6 +127,9 @@ let appBridge = {
   searchAudio: (query: string) => {
     ipcRenderer.invoke('searchAudio', query);
   },
+  playAudio: (videoId: string) => {
+    ipcRenderer.invoke('playAudio', videoId);
+  }
 }
 
 
