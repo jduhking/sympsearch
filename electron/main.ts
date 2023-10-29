@@ -45,6 +45,11 @@ function createWindow() {
       nodeIntegrationInWorker: true,
       preload: path.join(__dirname, 'preload.js'),
     },
+    width: 853,
+    height: 400,
+    frame: false,
+    transparent: true,
+    resizable: false,
   })
 
   // Test active push message to Renderer-process.

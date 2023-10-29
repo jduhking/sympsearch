@@ -8,6 +8,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <App />
   </React.StrictMode>
 )
+var windowTopBar = document.createElement('div');
+windowTopBar.className = 'top-window';
+document.body.appendChild(windowTopBar);
 
 
 // Remove Preload scripts loading

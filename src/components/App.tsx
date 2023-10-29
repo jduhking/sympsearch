@@ -1,5 +1,8 @@
-import { useState, useEffect, SetStateAction } from 'react';
-import Song from '@/components/Song'
+import { useState, useEffect} from 'react';
+import '../../css/App.css';
+import Song from '@/components/Song';
+import treble from '@/assets/treble.png';
+import magnifying from '@/assets/magnifier.png';
 
 window.ipcRenderer.on('gotData', (event, data) => {
   console.log('Got data!');
@@ -88,18 +91,20 @@ const App: React.FC = () => {
     setSearch(message);
   }
   return (
-    <>
-      <div>
+      <div className="main-container">
+        <div className="search-frame">
+          <div className="logo-section">
+            <img src={treble} width={32} height={54.54}/>
+            <h1 className="title">Symphony</h1>
+          </div>
+          <div className="magnifyer-search">
+            <img className="magnifying-glass" src={magnifying} width={64} height={63.47}/>
+              <form onSubmit={handleSubmit}>
+                  <input className="searchbar" alt="searchbar" onChange={(e) => searchChanged(e.target.value)}/>
+              </form>
+          </div>
+        </div>
         <div>
-          <h1>SympSearch</h1>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Search:
-              <input alt="searchbar" onChange={(e) => searchChanged(e.target.value)}/>
-            </label>
-            <button type="submit">Search</button>
-          </form>
-          <div>
             {
               (
                 songs.map((song) => {
@@ -109,9 +114,7 @@ const App: React.FC = () => {
               )
             }
           </div>
-        </div>
       </div>
-    </>
   )
 }
 
