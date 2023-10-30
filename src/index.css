@@ -9,15 +9,21 @@
 }
 
 
+
 body {
   margin: 0;
   display: flex;
   align-items:  'center';
   max-width: 853px;
-  overflow-y:hidden;
   max-height: 100vh;
+  color: #fff;
   -webkit-user-select: none;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 
 .top-window {
   width: 200px;
@@ -36,3 +42,17 @@ img {
   -webkit-user-select: none; 
   pointer-events: none;
 }
+
+@font-face {
+  font-family: "LuckiestGuy";
+  src: local("LuckiestGuy"),
+   url("./assets/fonts/LuckiestGuy-Regular.ttf") format("truetype");
+  font-weight: bold;
+ }
+
+ @font-face {
+  font-family: "RedHatDisplay";
+  src: local("RedHatDisplay"),
+  url("./assets/fonts/RedHatDisplay-VariableFont_wght.ttf") format("truetype");
+  font-weight: bold;
+ }

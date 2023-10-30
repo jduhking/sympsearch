@@ -13,6 +13,7 @@ interface ISong {
   id: string;
   title: string;
   thumbnail?: string;
+  author: string;
 }
 
 interface IItem {
@@ -72,7 +73,8 @@ const App: React.FC = () => {
         let song: ISong = {
           id: item.id.videoId,
           title: item.snippet.title,
-          thumbnail: item.snippet.thumbnails.high.url
+          thumbnail: item.snippet.thumbnails.high.url,
+          author: item.snippet.channelTitle
         }
         songList.push(song);
       })
@@ -86,35 +88,32 @@ const App: React.FC = () => {
 
 
   const searchChanged = (message: string) => {
-
-    console.log(message);
     setSearch(message);
   }
-  return (
-      <div className="main-container">
+  return (<>
+        {songs.length > 0 && <div className="main-container-active" ></div>}
+        <div className='songsWrapper'>
+            {
+                songs.map((song) => {
+                  return (<Song id={song.id} title={song.title} thumbnail={song.thumbnail} author={song.author}
+                    />)
+                })
+            }
+        </div>
         <div className="search-frame">
           <div className="logo-section">
             <img src={treble} width={32} height={54.54}/>
             <h1 className="title">Symphony</h1>
           </div>
           <div className="magnifyer-search">
-            <img className="magnifying-glass" src={magnifying} width={64} height={63.47}/>
+              <img className="magnifying-glass" src={magnifying} width={64} height={63.47}/>
               <form onSubmit={handleSubmit}>
                   <input className="searchbar" alt="searchbar" onChange={(e) => searchChanged(e.target.value)}/>
               </form>
           </div>
         </div>
-        <div>
-            {
-              (
-                songs.map((song) => {
-                  return (<Song id={song.id} title={song.title} thumbnail={song.thumbnail} 
-                    />)
-                })
-              )
-            }
-          </div>
-      </div>
+        
+      </>
   )
 }
 

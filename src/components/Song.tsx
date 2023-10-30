@@ -1,24 +1,38 @@
 import thumbnailPlaceholder from '@/assets/thumbnail-placeholder.png'
+import playButton from '@/assets/play.svg'
+import '../../css/App.css';
 
 interface Props {
     id: string;
     title: string;
     thumbnail?: string;
+    author: string;
 }
 
-const Song: React.FC<Props> = ({id, title="default-title", thumbnail}) => {
+const Song: React.FC<Props> = ({id, title="default-title", thumbnail, author="some-author"}) => {
     
     const playSong = () => {
         console.log('playing song with id' + id);
         window.appBridge.playAudio(id);
     }
+
+    const maxTextLength = 45
+
     return (
-    <div key={id} style={{ padding: 10, backgroundColor: '#FFD6C0', borderBottom: 'solid',
-    borderColor: '#000', borderBottomWidth: 1, width: '100vw',
-     height: 150, color: '#000', display: 'flex'}}>
-        <div style={{ width: '30%'}}><h1 style={{ fontSize: 20}}>{title}</h1></div>
-        <img src={thumbnail ? thumbnail : thumbnailPlaceholder} width={150} height={150}/>
-        <button type="button" onClick={playSong}/>
+    <div key={id} className='songContainer'>
+        <div className='songWidget'>
+            <h1 className='audioTitle'>{ (title.length <= maxTextLength) ? title : 
+            title.substring(0, maxTextLength) + " . . ." }</h1>
+            <p className='author'>{author}</p>
+                    <div className='thumbnailWrapper'>
+                        <img className='thumbnail' src={thumbnail} />
+                    </div>
+            <div className='playButtonWrapper'>
+                <img className='playButtonImage' src={playButton}/>
+                <button className='playButton' type='button' onClick={playSong}/>
+            </div>
+            
+        </div>
     </div>
     )
 }

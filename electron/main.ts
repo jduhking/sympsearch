@@ -46,7 +46,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
     },
     width: 853,
-    height: 400,
+    height: 648,
     frame: false,
     transparent: true,
     resizable: false,
@@ -159,7 +159,6 @@ ipcMain.handle('playAudio', (event: any, videoId: string) => {
 ipcMain.handle('searchAudio', (event: any, query) => {
   const apiKey = process.env.GOOGLE_API_KEY;
   const url = `https://www.googleapis.com/youtube/v3/search/?key=${apiKey}&q=${query}&type=video&part=snippet`;
-  // console.log(url);
   const request = net.request(url)
   let data: any;
   request.on('response', (response) => {
